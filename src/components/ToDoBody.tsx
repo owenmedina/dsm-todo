@@ -15,19 +15,28 @@ const ToDoBody: React.FC = () => {
 
     React.useEffect(() => {
         window.localStorage.setItem(itemsKey, JSON.stringify(items));
-        console.log('items has changed: ', items);
     }, [items]);
 
     const addItem = (item: Item) => {
         setItems((prevItems) => [...prevItems, item]);
-        console.log("Added an item");
     }
 
-    const toDoListItems =
-    <ToDoList items={items} />;
+    const toggleDone = (itemId: string) => {
+        setItems((prevItems) => {
+            const oldItemIndex = prevItems.findIndex((item) => item.key === itemId);
+            if (oldItemIndex === -1) return prevItems;
+
+            
+            const oldItem = prevItems[oldItemIndex];
+            const newDone = !oldItem.done;
+            const newItems = prevItems;
+            newItems.splice(oldItemIndex, 1, {...oldItem, done: newDone});
+            return [...newItems];
+        });
+    }
 
     return (<List>
-        {items.length > 0 && toDoListItems}
+        {items.length > 0 && <ToDoList items={items} toggleDone={toggleDone}/>}
         <ListItem >
             <AddToDoItem onAdd={addItem}/>
         </ListItem>
