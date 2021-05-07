@@ -14,7 +14,19 @@ const useStyles = makeStyles({
         margin: '2rem 0 2rem 0',
         padding: '1.5rem 0 1.5rem 0',
         backgroundColor: '#f1faee',
-        borderRadius: '1rem'
+        borderRadius: '1rem',
+
+        '@media only screen and (max-width: 767px)': {
+            width: "60%"
+        },
+
+        '@media only screen and (max-width: 600px)': {
+            width: "70%"
+        },
+
+        '@media only screen and (max-width: 500px)': {
+            width: "80%"
+        }
     },
     container: {
         width: '100%',
