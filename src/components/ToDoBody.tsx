@@ -18,17 +18,28 @@ const useStyles = makeStyles({
     }
 });
 
-const ToDoBody: React.FC = () => {
+interface Props {
+    query: string;
+}
+
+const ToDoBody: React.FC<Props> = ({query}) => {
     const classes = useStyles();
 
     const itemsKey = 'items';
     const lsItems = window.localStorage.getItem(itemsKey);
     const defaultItems: Array<Item> = lsItems === null ? [] : JSON.parse(lsItems);
-    const [items, setItems] = useState(defaultItems);
 
+    const [items, setItems] = useState(defaultItems);
     React.useEffect(() => {
         window.localStorage.setItem(itemsKey, JSON.stringify(items));
     }, [items]);
+
+    const [queryString, setQueryString] = useState(query);
+    React.useEffect(() => {
+        setQueryString(query);
+        console.log('new query', query);
+    }, [query]);
+
 
     const addItem = (item: Item) => {
         setItems((prevItems) => [...prevItems, item]);
@@ -60,7 +71,7 @@ const ToDoBody: React.FC = () => {
     }
 
     return (<List className={classes.root}>
-        {items.length > 0 && <ToDoList items={items} toggleDone={toggleDone} deleteItem={deleteItem}/>}
+        {items.length > 0 && <ToDoList items={items.filter(item => item.label.includes(queryString))} toggleDone={toggleDone} deleteItem={deleteItem}/>}
         <ListItem className={classes.listItem}>
             <AddToDoItem onAdd={addItem}/>
         </ListItem>

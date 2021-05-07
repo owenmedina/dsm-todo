@@ -1,9 +1,9 @@
 import Box from "@material-ui/core/Box";
-// import { Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
 
 import ToDoHeader from './ToDoHeader';
 import ToDoBody from './ToDoBody';
+import { useState } from "react";
 
 const useStyles = makeStyles({
     root: {
@@ -23,9 +23,15 @@ const useStyles = makeStyles({
 function ToDo() {
     const classes = useStyles();
     const toDoListTitle = 'Today';
+
+    const [queryString, setQueryString] = useState('');
+
+    const search = (query: string) => {
+        setQueryString(query);
+    }
     return (<Box className={classes.root}>
-            <ToDoHeader title={toDoListTitle}/>
-            <ToDoBody />
+            <ToDoHeader title={toDoListTitle} search={search}/>
+            <ToDoBody query={queryString}/>
         </Box>);
 }
 
