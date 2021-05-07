@@ -35,8 +35,19 @@ const ToDoBody: React.FC = () => {
         });
     }
 
+    const deleteItem = (itemId: string) => {
+        setItems((prevItems) => {
+            const oldItemIndex = prevItems.findIndex((item) => item.key === itemId);
+            if (oldItemIndex === -1) return prevItems;
+
+            const newItems = prevItems;
+            newItems.splice(oldItemIndex, 1);
+            return [...newItems];
+        })
+    }
+
     return (<List>
-        {items.length > 0 && <ToDoList items={items} toggleDone={toggleDone}/>}
+        {items.length > 0 && <ToDoList items={items} toggleDone={toggleDone} deleteItem={deleteItem}/>}
         <ListItem >
             <AddToDoItem onAdd={addItem}/>
         </ListItem>
