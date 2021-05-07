@@ -5,7 +5,7 @@ import Search from './Search';
 
 interface Props {
     title: string
-    search: (query: string) => void;
+    searchHandler: (query: string) => void;
 };
 
 const useStyles = makeStyles({
@@ -18,11 +18,11 @@ const useStyles = makeStyles({
     }
 });
 
-const ToDoHeader: React.FC<Props> = ({title, search}) => {
+const ToDoHeader: React.FC<Props> = ({title, searchHandler}) => {
     const classes = useStyles();
     return (<div className={classes.header} >
         <Typography variant="h4">{title}</Typography>
-        <Search search={search}/>
+        <Search searchHandler={searchHandler}/>
         </div>);
 }
 

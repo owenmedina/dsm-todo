@@ -26,11 +26,12 @@ function ToDo() {
 
     const [queryString, setQueryString] = useState('');
 
-    const search = (query: string) => {
+    const searchHandler = (query: string) => {
         setQueryString(query);
     }
+
     return (<Box className={classes.root}>
-            <ToDoHeader title={toDoListTitle} search={search}/>
+            <ToDoHeader title={toDoListTitle} searchHandler={searchHandler}/>
             <ToDoBody query={queryString}/>
         </Box>);
 }

@@ -4,26 +4,26 @@ import Input from "@material-ui/core/Input";
 import React, { useState } from "react";
 
 interface Props {
-    search: (query: string) => void;
+    searchHandler: (query: string) => void;
 }
-const Search: React.FC<Props> = ({search}) => {
+const Search: React.FC<Props> = ({searchHandler}) => {
     const [expanded, setExpanded] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
     const changeHandler = (ev: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchQuery(ev.target.value);
+        const { value } = ev.target;
+        setSearchQuery(value);
     }
 
     const submitHandler = (ev: React.FormEvent<HTMLElement>) => {
         ev.preventDefault();
 
         if (expanded) {
-            search(searchQuery);
+            searchHandler(searchQuery);
             setSearchQuery('');
         }
         
         setExpanded((prev) => !prev);
-
     }
 
     const searchButton = <IconButton type={'submit'} onSubmit={submitHandler} onClick={submitHandler}>
@@ -33,6 +33,7 @@ const Search: React.FC<Props> = ({search}) => {
         <Input inputProps={{style: {padding: 0}}} value={searchQuery} placeholder="Search" disableUnderline={true} onChange={changeHandler}/>
         {searchButton}
     </form>
+    
     return (<div>
         {expanded ? searchForm : searchButton}
     </div>);
