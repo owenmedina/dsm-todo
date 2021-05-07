@@ -23,9 +23,8 @@ const ToDoBody: React.FC = () => {
         console.log("Added an item");
     }
 
-    const toDoListItems = <ListItem >
-    <ToDoList items={items} />
-</ListItem>;
+    const toDoListItems =
+    <ToDoList items={items} />;
 
     return (<List>
         {items.length > 0 && toDoListItems}

@@ -1,3 +1,4 @@
+import { makeStyles } from "@material-ui/core";
 import Input from "@material-ui/core/Input"
 import { useState } from 'react';
 
@@ -22,7 +23,7 @@ const AddToDoItem: React.FC<Props> = ({onAdd}) => {
         setNewItem(new Item(new Date().getMilliseconds().toString(), ''));
     };
     return (<form onSubmit={(submitHandler)}>
-        <Input value={newItem.label} placeholder="New item" disableUnderline={true} onChange={changeHandler}/>
+        <Input inputProps={{style: {padding: 0}}} value={newItem.label} placeholder="New item" disableUnderline={true} onChange={changeHandler}/>
     </form>);
 };
 
