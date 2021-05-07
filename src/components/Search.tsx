@@ -2,6 +2,9 @@ import { IconButton } from "@material-ui/core";
 import { SearchOutlined } from "@material-ui/icons";
 import Input from "@material-ui/core/Input";
 import React, { useState } from "react";
+import { CSSTransition } from "react-transition-group";
+
+import '../assets/css/search-input.css'
 
 interface Props {
     searchHandler: (query: string) => void;
@@ -29,13 +32,20 @@ const Search: React.FC<Props> = ({searchHandler}) => {
     const searchButton = <IconButton type={'submit'} onSubmit={submitHandler} onClick={submitHandler}>
         <SearchOutlined />
     </IconButton>;
-    const searchForm = <form onSubmit={submitHandler} >
+    const searchForm = <CSSTransition
+    timeout={3000}
+    in={expanded}
+    classNames="search-input"
+    onEnter={() => setExpanded(true)}
+    onExit={() => setExpanded(false)}
+    unmountOnExit
+  ><form style={{display: 'inline-block'}} onSubmit={submitHandler} >
         <Input inputProps={{style: {padding: 0}}} value={searchQuery} placeholder="Search" disableUnderline={true} onChange={changeHandler}/>
-        {searchButton}
-    </form>
-    
+    </form></CSSTransition>;
+
     return (<div>
-        {expanded ? searchForm : searchButton}
+        {expanded && searchForm}
+        {searchButton}
     </div>);
 }
 

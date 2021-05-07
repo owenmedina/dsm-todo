@@ -1,5 +1,6 @@
 import Input from "@material-ui/core/Input"
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import Item from '../types/Item';
 
@@ -13,14 +14,15 @@ const AddToDoItem: React.FC<Props> = ({onAdd}) => {
 
     const changeHandler = (ev: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = ev.target;
-        setNewItem(new Item(new Date().getMilliseconds().toString(), value));
+        setNewItem((prev) => { return {...prev, label: value}});
     };
 
     const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (newItem.label === "") return;
         onAdd(newItem);
-        setNewItem(new Item(new Date().getMilliseconds().toString(), ''));
+        const key = uuidv4();
+        setNewItem(new Item(key, ''));
     };
     return (<form onSubmit={(submitHandler)}>
         <Input inputProps={{style: {padding: 0}}} value={newItem.label} placeholder="New item" disableUnderline={true} onChange={changeHandler}/>
