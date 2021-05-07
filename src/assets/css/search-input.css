@@ -1,0 +1,18 @@
+.search-input-enter {
+  opacity: 0;
+  transform: translateX(50%);
+}
+.search-input-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 3000ms;
+}
+.search-input-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.search-input-exit-active {
+  opacity: 0;
+  transform: translateX(50%);
+  transition: all 3000ms;
+}

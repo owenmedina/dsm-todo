@@ -1,7 +1,10 @@
 import React from "react";
 import { useState } from "react";
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
+
 import Item from "../types/Item";
 import ToDoItem from "./ToDoItem";
+import '../assets/css/item.css';
 
 interface Props {
     items: Item[];
