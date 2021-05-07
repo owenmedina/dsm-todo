@@ -18,6 +18,7 @@ const AddToDoItem: React.FC<Props> = ({onAdd}) => {
 
     const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (newItem.label === "") return;
         onAdd(newItem);
         setNewItem(new Item(new Date().getMilliseconds().toString(), ''));
     };
