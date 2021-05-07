@@ -4,6 +4,7 @@ import ListItem from '@material-ui/core/ListItem';
 import { useState } from 'react';
 
 import AddToDoItem from "./AddToDoItem";
+import ToDoList from './ToDoList';
 import Item from '../types/Item';
 
 const ToDoBody: React.FC = () => {
@@ -21,10 +22,13 @@ const ToDoBody: React.FC = () => {
         setItems((prevItems) => [...prevItems, item]);
         console.log("Added an item");
     }
+
+    const toDoListItems = <ListItem >
+    <ToDoList items={items} />
+</ListItem>;
+
     return (<List>
-        <ListItem >
-            ToDoListItems
-        </ListItem>
+        {items.length > 0 && toDoListItems}
         <ListItem >
             <AddToDoItem onAdd={addItem}/>
         </ListItem>
