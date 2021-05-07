@@ -1,20 +1,28 @@
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core";
 
+import Search from './Search';
+
 interface Props {
     title: string
 };
 
 const useStyles = makeStyles({
-    title: {
-        padding: '.5rem',
+    header: {
+        padding: '.5rem 1.5rem .5rem 1.5rem',
         borderBottom: '1px solid rgba(229,229,229,.9)',
+
+        display: 'flex',
+        justifyContent: 'space-between',
     }
 });
 
 const ToDoHeader: React.FC<Props> = ({title}) => {
     const classes = useStyles();
-    return (<Typography className={classes.title} variant="h3">{title}</Typography>);
+    return (<div className={classes.header} >
+        <Typography variant="h4">{title}</Typography>
+        <Search />
+        </div>);
 }
 
 export default ToDoHeader;

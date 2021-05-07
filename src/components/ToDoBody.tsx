@@ -2,12 +2,25 @@ import React from "react";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import { useState } from 'react';
+import { makeStyles } from "@material-ui/core";
 
 import AddToDoItem from "./AddToDoItem";
 import ToDoList from './ToDoList';
 import Item from '../types/Item';
 
+const useStyles = makeStyles({
+    root: {
+        padding: '0.5rem 1.5rem 0.5rem 1.5rem'
+    },
+    listItem: {
+        paddingRight: '0',
+        paddingLeft: '0'
+    }
+});
+
 const ToDoBody: React.FC = () => {
+    const classes = useStyles();
+
     const itemsKey = 'items';
     const lsItems = window.localStorage.getItem(itemsKey);
     const defaultItems: Array<Item> = lsItems === null ? [] : JSON.parse(lsItems);
@@ -46,9 +59,9 @@ const ToDoBody: React.FC = () => {
         })
     }
 
-    return (<List>
+    return (<List className={classes.root}>
         {items.length > 0 && <ToDoList items={items} toggleDone={toggleDone} deleteItem={deleteItem}/>}
-        <ListItem >
+        <ListItem className={classes.listItem}>
             <AddToDoItem onAdd={addItem}/>
         </ListItem>
     </List>);

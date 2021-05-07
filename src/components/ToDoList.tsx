@@ -16,7 +16,8 @@ const ToDoList: React.FC<Props> = ({items, toggleDone, deleteItem}) => {
     }, [items]);
     const itemComponents = toDoListItems.map(item => <ToDoItem key={item.key} id={item.key} label={item.label} done={item.done} toggleDone={toggleDone} deleteItem={deleteItem}/>);
     return (<div>
-        {itemComponents}
+          {itemComponents}
+        
     </div>);
 }
 
